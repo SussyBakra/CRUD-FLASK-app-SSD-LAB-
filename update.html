@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header">Update Record</div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('update', id=person.id) }}">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            <label class="form-label">{{ form.first_name.label }} *</label>
+            {{ form.first_name(class_='form-control', required=True, value=person.first_name) }}
+            {% for err in form.first_name.errors %}
+              <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.last_name.label }}</label>
+            {{ form.last_name(class_='form-control', value=person.last_name) }}
+            {% for err in form.last_name.errors %}
+              <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ form.email.label }}</label>
+            {{ form.email(class_='form-control', value=person.email) }}
+            {% for err in form.email.errors %}
+              <div class="text-danger small">{{ err }}</div>
+            {% endfor %}
+          </div>
+          <button type="submit" class="btn btn-success">Save changes</button>
+          <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
